@@ -1,0 +1,1 @@
+export const KEYS = ['a', 'b', 'c', 'd', 'Enter'];
