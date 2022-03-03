@@ -1,20 +1,48 @@
+* {
+  margin: 0;
+  border: 0;
+}
+
 body {
   background-color: #6e5c62;
 }
 
 /* HEADER */
 
+header {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+header > button {
+  height: 30px;
+  width: 30px;
+}
+
+#help {
+  margin-left: 30px;
+}
+
+header > h1 {
+  text-align: center;
+  width: 300px;
+  margin: 0 150px;
+  color: #FAFAFF;
+}
+
 /* GAME */
 
 main {
-  margin-top: 50px;
+  margin-top: 100px;
 }
 
 .wordBox {
   border: solid #4C4347 3px;
   border-radius: 5px;
-  height: 80px;
-  width: 80px;
+  height: 48px;
+  width: 48px;
   margin: 3px;
   font-size: 50px;
   font-weight: bold;
@@ -35,8 +63,8 @@ form {
 }
 
 .letterOnFocus {
-  height: 73px;
-  border-bottom: solid #4C4347 10px;
+  height: 45px;
+  border-bottom: solid #4C4347 8px;
 }
 
 /* KEYBOARD */
@@ -92,4 +120,76 @@ footer {
 .wrongLetter {
   background-color: #312a2c;
   border: solid #312a2c 3px;
+}
+
+/* NON WIDESCREEN DISPLAY */
+
+@media only screen and (max-width: 1280px) {
+  .wordBox {
+    height: 74px;
+    width: 74px;
+  }
+
+  .letterOnFocus {
+    height: 64px;
+    border-bottom: solid #4C4347 9px;
+  }
+}
+
+/* SMALL MOBILE */
+
+@media only screen and (max-width: 600px) {
+  header {
+    width: 100%;
+  }
+  
+  header > button {
+    height: 13px;
+    width: 13px;
+  }
+  
+  #help {
+    margin-left: 1px;
+  }
+  
+  header > h1 {
+    width: 140px;
+    margin: 0 20px;
+    color: #FAFAFF;
+  }
+  
+  /* header > h1 {
+    width: 100px;
+    margin: 0 150px;
+  }
+
+  header > button {
+    height: 5px;
+    width: 5px;
+  } */
+
+  .wordBox {
+    border: solid #4C4347 2px;
+    height: 24px;
+    width: 24px;
+    font-size: 20px;
+  }
+
+  .letterOnFocus {
+    height: 20px;
+    border-bottom: solid #4C4347 6px;
+  }
+
+  footer {
+    width: 100%;
+    margin-top: 50px;
+    /* margin-left: calc((100vw - 714px) / 2); */
+  }
+  
+  .key {
+    width: 20px;
+    height: 20px;
+    margin: 1px;
+    font-size: 15px;
+  }
 }

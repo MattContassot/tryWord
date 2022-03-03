@@ -4,7 +4,10 @@ class Header extends Component {
   render() {
     return (
       <header>
-        botões de ajuda e placar
+        <button type="button" id="help">?</button>
+        <h1>Try Word</h1>
+        <button>Placar</button>
+        <button>Config</button>
       </header>
     );
   }
