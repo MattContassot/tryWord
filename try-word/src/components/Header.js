@@ -4,7 +4,7 @@ class Header extends Component {
   render() {
     return (
       <header>
-        ajuda e placar
+        botões de ajuda e placar
       </header>
     );
   }

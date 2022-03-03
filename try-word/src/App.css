@@ -1,5 +1,95 @@
+body {
+  background-color: #6e5c62;
+}
+
+/* HEADER */
+
+/* GAME */
+
+main {
+  margin-top: 50px;
+}
+
 .wordBox {
-  border: solid black 1px;
-  height: 40px;
-  width: 40px;
+  border: solid #4C4347 3px;
+  border-radius: 5px;
+  height: 80px;
+  width: 80px;
+  margin: 3px;
+  font-size: 50px;
+  font-weight: bold;
+  text-align: center;
+  color: #FAFAFF;
+  background-color: #6e5c62;
+  outline: none;
+}
+
+.currentAttemp {
+  background-color: #615458;
+  border: solid #615458 3px;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+}
+
+.letterOnFocus {
+  height: 73px;
+  border-bottom: solid #4C4347 10px;
+}
+
+/* KEYBOARD */
+
+footer {
+  width: 714px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;  
+  margin-top: 50px;
+  margin-left: calc((100vw - 714px) / 2);
+}
+
+.key {
+  width: 60px;
+  height: 60px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4C4347;
+  color: #FAFAFF;
+  font-weight: bold;
+  margin: 3px;
+  font-size: 25px;
+}
+
+#A {
+  margin-left: 40px;
+}
+
+#Z {
+  margin-left: 50px;
+}
+
+#ç {
+  margin-left: 20px;
+}
+
+#ENTER {
+  margin-left: 20px;
+  width: 182px;
+}
+
+.correctLetter {
+  background-color: #3aa394;
+  border: solid #3aa394 3px;
+}
+
+.letterIncluded {
+  background-color: #d3ad69;
+  border: solid #d3ad69 3px;
+}
+
+.wrongLetter {
+  background-color: #312a2c;
+  border: solid #312a2c 3px;
 }

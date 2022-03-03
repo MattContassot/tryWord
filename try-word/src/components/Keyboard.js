@@ -4,16 +4,15 @@ import { sendKeyDown } from '../store/actions';
 import { KEYS } from '../services/constants';
 
 class Keyboard extends Component {
-  constructor() {
-    super();
-  }
-
   handleClick = ({ target: { id } }) => {
     const { setKey } = this.props;
+
     setKey(id);
   }
 
   render() {
+    const { lastLetter } = this.props;
+
     return (
       <footer>
         {
@@ -23,6 +22,8 @@ class Keyboard extends Component {
               type="button"
               key={ index }
               onClick={ this.handleClick }
+              className="key"
+              disabled={ lastLetter ? true : false }
             >
               {key}
             </button>
@@ -33,8 +34,12 @@ class Keyboard extends Component {
   }
 }
 
+const mapStateToProps = ({ lastLetter }) => ({
+  lastLetter,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   setKey: (key) => dispatch(sendKeyDown(key)),
 });
 
-export default connect(null, mapDispatchToProps)(Keyboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Keyboard);
