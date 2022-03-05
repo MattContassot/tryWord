@@ -153,17 +153,19 @@ footer {
 /* SMALL MOBILE */
 
 @media only screen and (max-width: 600px) {
+  /* HEADER */
+
   header {
     width: 100%;
   }
   
-  header > button {
-    height: 13px;
-    width: 13px;
+  header > p {
+    height: 20px;
+    width: 20px;
   }
   
-  #help {
-    margin-left: 1px;
+  #help, #settings {
+    margin-left: 10px;
   }
   
   header > h1 {
@@ -171,16 +173,6 @@ footer {
     margin: 0 20px;
     color: #FAFAFF;
   }
-  
-  /* header > h1 {
-    width: 100px;
-    margin: 0 150px;svg
-  }
-
-  header > button {
-    height: 5px;
-    width: 5px;
-  } */
 
   main {
     margin-top: 10px;
@@ -192,12 +184,9 @@ footer {
     width: 40px;
     font-size: 30px;
   }
-
-  button > svg {
-    margin-left: 0;
-  }
   
-  svg {
+  #ç > svg {
+    margin-left: 0;
     width: 19px;
     height: 19px;
   }
