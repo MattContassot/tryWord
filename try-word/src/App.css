@@ -16,13 +16,16 @@ header {
   justify-content: center;
 }
 
-header > button {
-  height: 30px;
-  width: 30px;
-}
-
-#help {
-  margin-left: 30px;
+header > p {
+  height: 25px;
+  width: 25px;
+  color: #B7AEB4;
+  background-color: #6e5c62;
+  border: solid #B7AEB4 2px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 header > h1 {
@@ -30,6 +33,10 @@ header > h1 {
   width: 300px;
   margin: 0 150px;
   color: #FAFAFF;
+}
+
+#help, #settings {
+  margin-left: 30px;
 }
 
 /* GAME */
@@ -52,7 +59,14 @@ main {
   outline: none;
 }
 
-.currentAttemp {
+#ç > svg {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  margin-left: 10px;
+}
+
+.notCurrentAttemp {
   background-color: #615458;
   border: solid #615458 3px;
 }
@@ -63,7 +77,7 @@ form {
 }
 
 .letterOnFocus {
-  height: 45px;
+  height: 43px;
   border-bottom: solid #4C4347 8px;
 }
 
@@ -131,7 +145,7 @@ footer {
   }
 
   .letterOnFocus {
-    height: 64px;
+    height: 68px;
     border-bottom: solid #4C4347 9px;
   }
 }
@@ -160,7 +174,7 @@ footer {
   
   /* header > h1 {
     width: 100px;
-    margin: 0 150px;
+    margin: 0 150px;svg
   }
 
   header > button {
@@ -168,28 +182,66 @@ footer {
     width: 5px;
   } */
 
+  main {
+    margin-top: 10px;
+  }
+
   .wordBox {
     border: solid #4C4347 2px;
-    height: 24px;
-    width: 24px;
-    font-size: 20px;
+    height: 40px;
+    width: 40px;
+    font-size: 30px;
+  }
+
+  button > svg {
+    margin-left: 0;
+  }
+  
+  svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .notCurrentAttemp {
+    border: solid #615458 2px;
   }
 
   .letterOnFocus {
-    height: 20px;
-    border-bottom: solid #4C4347 6px;
+    height: 35px;
+    border-bottom: solid #4C4347 7px;
   }
 
   footer {
-    width: 100%;
-    margin-top: 50px;
-    /* margin-left: calc((100vw - 714px) / 2); */
+    width: 360px;
+    margin-top: 20px;
+    margin-left: 0;
   }
   
   .key {
-    width: 20px;
-    height: 20px;
-    margin: 1px;
-    font-size: 15px;
+    width: 30px;
+    height: 40px;
+    margin: 2px;
+    font-size: 14px;
+  }
+
+  #A {
+    margin-left: 17px;
+  }
+
+  #P {
+    margin-right: 9px;
+  }
+
+  #ç {
+    margin-left: 7px;
+  }
+  
+  #Z {
+    margin-left: 34px;
+  }
+  
+  #ENTER {
+    margin-left: 7px;
+    width: 81px;
   }
 }

@@ -146,7 +146,7 @@ class Game extends Component {
             key={ `a${i}-l${j}` }
             id={ `a${i}-l${j}` }
             type="text"
-            className={ i !== 1 ? "wordBox currentAttemp" : "wordBox" }
+            className={ i !== 1 ? "wordBox notCurrentAttemp" : "wordBox" }
             maxLength="1"
             value={ eval(`a${i}l${j}`) }
             onChange={ this.handleChange }

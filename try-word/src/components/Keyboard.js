@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { sendKeyDown } from '../store/actions';
 import { KEYS } from '../services/constants';
+import { backspace } from '../services/icons';
 
 class Keyboard extends Component {
   handleClick = ({ target: { id } }) => {
@@ -25,7 +26,7 @@ class Keyboard extends Component {
               className="key"
               disabled={ lastLetter ? true : false }
             >
-              {key}
+              {key === 'ç' ? backspace() : key}
             </button>
           ))
         }
