@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { sendKeyDown, enableEnter } from '../store/actions';
 import { ATTEMPTS } from '../services/constants';
-import { selectWord, validateWord, focusNextLetter } from '../services/functions';
+import { correctWord, selectWord, validateWord, focusNextLetter } from '../services/functions';
 
 class Game extends Component {
   constructor() {
@@ -117,16 +117,20 @@ class Game extends Component {
       const attemptId = `attempt${document.querySelector('.letterOnFocus').id.substring(1, 2)}`;
       const { words: { [attemptId]: attempt }, word } = this.state;
       const wordTried = Object.values(attempt);
+      const lastAttempt = `a${Number(attemptId.substring(7, 8))}`;
+      const attemptNumber = `a${Number(attemptId.substring(7, 8)) + 1}`;
+ 
       
-      if (word === wordTried.join('')) return console.log('colocar todas palavras verde e chamar o placar');
+      if (correctWord(word, [...wordTried], lastAttempt)) {
+        return alert('O jogo acabou');
+      }
+
       validateWord(word, [...wordTried], attemptId);
       
       this.setState((prevAttempt) => ({
         ...prevAttempt,
         currentAttempt: prevAttempt.currentAttempt + 1,
       }), () => {
-        const lastAttempt = `a${Number(attemptId.substring(7, 8))}`;
-        const attemptNumber = `a${Number(attemptId.substring(7, 8)) + 1}`;
         const attempt = document.querySelectorAll(`[id*=${attemptNumber}]`);
         
         attempt.forEach((letter) => {

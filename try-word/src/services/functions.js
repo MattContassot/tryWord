@@ -12,7 +12,6 @@ export function selectWord() {
 }
 
 export function validateWord(word, wordTried, attempt) {
-  console.log(word);
   const wordArray = Array.from(word);
   const attemptId = attempt.substring(7, 8);
   let wordIncluded = wordArray;
@@ -23,12 +22,6 @@ export function validateWord(word, wordTried, attempt) {
 
     currentLetter = document.querySelector(`#a${attemptId}-l${i + 1}`);
     letterOnKeyboard = document.querySelector(`#${currentLetter.value}`);
-
-    console.log(`
-      Letra atual ${wordTried[i]}
-      Palavra correta ${wordArray}
-      Letras included ${wordIncluded}
-    `);
 
     if (!wordArray.includes(wordTried[i])) {
       currentLetter.classList.add('wrongLetter');
@@ -69,3 +62,22 @@ export const focusNextLetter = (currentLetter) => {
 
   return nextLetter.focus();
 };
+
+export function correctWord(word, wordTried, lastAttempt) {
+  if (word === wordTried.join('')) {
+    const disableAll = document.querySelectorAll('input');
+    const attempt = document.querySelectorAll(`[id*=${lastAttempt}]`);
+    const currentFocus = document.querySelector(`.letterOnFocus`);
+    
+    wordTried.forEach((letter) => {
+      const letterOnKeyboard = document.querySelector(`#${letter}`);
+      letterOnKeyboard.classList.add('correctLetter');
+    });
+    currentFocus.classList.remove('letterOnFocus');
+    disableAll.forEach((input) => input.disabled = true);
+    attempt.forEach((letter) => letter.classList.add('correctLetter'));
+
+    return true;
+  }
+  return false;
+}
