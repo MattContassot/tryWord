@@ -132,6 +132,7 @@ footer {
 }
 
 .wrongLetter {
+  color: #504a4b;
   background-color: #312a2c;
   border: solid #312a2c 3px;
 }

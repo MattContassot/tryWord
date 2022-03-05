@@ -11,6 +11,13 @@ class Keyboard extends Component {
     setKey(id);
   }
 
+  handleDelete = () => {
+    const { setKey } = this.props;
+    const currentLetter = document.querySelector('.letterOnFocus');
+
+    setKey('');
+  }
+
   render() {
     const { lastLetter } = this.props;
 
@@ -22,9 +29,9 @@ class Keyboard extends Component {
               id={ key }
               type="button"
               key={ index }
-              onClick={ this.handleClick }
+              onClick={ key === 'ç' ? this.handleDelete : this.handleClick }
               className="key"
-              disabled={ lastLetter ? true : false }
+              disabled={ key === 'ENTER' && lastLetter ? true : false }
             >
               {key === 'ç' ? backspace() : key}
             </button>

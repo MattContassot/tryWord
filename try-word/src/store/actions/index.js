@@ -6,9 +6,10 @@ export const setKey = (key) => ({
   key,
 });
 
-export const lastLetter = () => ({
+export const lastLetter = (payload) => ({
   type: LAST_LETTER,
+  payload,
 })
 
 export const sendKeyDown = (key) => setKey(key);
-export const enableEnter = () => lastLetter();
+export const enableEnter = (payload) => lastLetter(payload);
