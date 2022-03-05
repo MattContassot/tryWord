@@ -5,7 +5,7 @@ const INITIAL_STATE = true;
 const lastLetter = (state = INITIAL_STATE, actions) => {
   switch (actions.type) {
   case LAST_LETTER:
-    return (!state);
+    return (actions.payload);
   default:
     return state;
   }

@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { sendKeyDown, enableEnter } from '../store/actions';
 import { ATTEMPTS } from '../services/constants';
-import { selectWord, validateWord } from '../services/functions';
+import { selectWord, validateWord, focusNextLetter } from '../services/functions';
 
 class Game extends Component {
   constructor() {
     super();
 
     this.state = {
+      mobile: false,
+      currentAttempt: 1,
       keyTyped: '',
       word: '',
       words: {
@@ -64,6 +66,8 @@ class Game extends Component {
 
     this.setState({ word: selectWord() });
 
+    if (/Mobi|Android/i.test(navigator.userAgent)) this.setState({ mobile: true });
+
     return firstLetter.focus();
   }
 
@@ -71,28 +75,19 @@ class Game extends Component {
     const { keyDown } = this.props;
 
     if (prevProps.keyDown !== keyDown) {
+      if (keyDown === 'ENTER') this.handleEnterKey();
+      
+      const key = keyDown;
+      const id = document.querySelector('.letterOnFocus').id;
+      const keyPressed = {
+        nativeEvent: { data: key },
+        target: { id }
+      };
+
+      // this.handleChange(keyPressed);
       this.setState({ keyTyped: keyDown });
     }
   }
-
-  focusNextLetter = (currentLetter) => {
-    const onFocus = document.querySelector('.letterOnFocus');
-    onFocus.classList.remove('letterOnFocus');
-
-    const lastNumberId = Number(currentLetter.substring(4, 5)) + 1;
-    let nextLetter = document.querySelector(`#${currentLetter.substring(0, 4) + lastNumberId}`);
-
-    if (lastNumberId > 5) {
-      const nextAttempt = Number(currentLetter.substring(1, 2)) + 1;
-      nextLetter = document.querySelector(`#a${nextAttempt}-l1`);
-    }
-
-    if (currentLetter === 'a6-l5') return console.log('chamar o placar');
-
-    nextLetter.classList.add('letterOnFocus');
-
-    return nextLetter.focus();
-  };
 
   handleChange = ({ nativeEvent: { data: key }, target: { id } }) => {
     const attempt = `attempt${id.slice(1 , 2)}`;
@@ -111,29 +106,54 @@ class Game extends Component {
 
     setKey(key);
 
-    if (id.substring(4, 5) === '5') return enableEnter();
-
-    this.focusNextLetter(id);
+    if (id.substring(4, 5) === '5') return enableEnter(false);
+    else {
+      enableEnter(true) && focusNextLetter(id);
+    }
   }
 
   handleEnterKey = () => {
-    const attemptId = `attempt${document.querySelector('.letterOnFocus').id.substring(1, 2)}`;
-    const { words: { [attemptId]: attempt }, word } = this.state;
+    if (document.querySelector('.letterOnFocus').value) {
+      const attemptId = `attempt${document.querySelector('.letterOnFocus').id.substring(1, 2)}`;
+      const { words: { [attemptId]: attempt }, word } = this.state;
+      const wordTried = Object.values(attempt);
+      
+      if (word === wordTried.join('')) return console.log('colocar todas palavras verde e chamar o placar');
+      validateWord(word, [...wordTried], attemptId);
+      
+      this.setState((prevAttempt) => ({
+        ...prevAttempt,
+        currentAttempt: prevAttempt.currentAttempt + 1,
+      }), () => {
+        const lastAttempt = `a${Number(attemptId.substring(7, 8))}`;
+        const attemptNumber = `a${Number(attemptId.substring(7, 8)) + 1}`;
+        const attempt = document.querySelectorAll(`[id*=${attemptNumber}]`);
+        
+        attempt.forEach((letter) => {
+          letter.classList.remove('notCurrentAttemp');
+          const currentFocus = document.querySelector(`#${lastAttempt}-l5`);
+          const nextFocus = document.querySelector(`#${attemptNumber}-l1`);
+          
+          currentFocus.classList.remove('letterOnFocus');
+          nextFocus.classList.add('letterOnFocus');
 
-    const wordTried = Object.values(attempt);
-    
-    if (word === wordTried.join('')) return console.log('colocar todas palavras verde e chamar o placar');
-    validateWord(word, [...wordTried], attemptId);
+          return nextFocus.focus();
+        });
+      })
+    }
   }
 
   renderForm = () => {
-    const { words: {
-      attempt1: { letter1: a1l1, letter2: a1l2, letter3: a1l3, letter4: a1l4, letter5: a1l5 },
-      attempt2: { letter1: a2l1, letter2: a2l2, letter3: a2l3, letter4: a2l4, letter5: a2l5 },
-      attempt3: { letter1: a3l1, letter2: a3l2, letter3: a3l3, letter4: a3l4, letter5: a3l5 },
-      attempt4: { letter1: a4l1, letter2: a4l2, letter3: a4l3, letter4: a4l4, letter5: a4l5 },
-      attempt5: { letter1: a5l1, letter2: a5l2, letter3: a5l3, letter4: a5l4, letter5: a5l5 },
-      attempt6: { letter1: a6l1, letter2: a6l2, letter3: a6l3, letter4: a6l4, letter5: a6l5 },
+    const { 
+      mobile,
+      currentAttempt,
+      words: {
+        attempt1: { letter1: a1l1, letter2: a1l2, letter3: a1l3, letter4: a1l4, letter5: a1l5 },
+        attempt2: { letter1: a2l1, letter2: a2l2, letter3: a2l3, letter4: a2l4, letter5: a2l5 },
+        attempt3: { letter1: a3l1, letter2: a3l2, letter3: a3l3, letter4: a3l4, letter5: a3l5 },
+        attempt4: { letter1: a4l1, letter2: a4l2, letter3: a4l3, letter4: a4l4, letter5: a4l5 },
+        attempt5: { letter1: a5l1, letter2: a5l2, letter3: a5l3, letter4: a5l4, letter5: a5l5 },
+        attempt6: { letter1: a6l1, letter2: a6l2, letter3: a6l3, letter4: a6l4, letter5: a6l5 },
     } } = this.state;
     let formRendered = [];
 
@@ -150,8 +170,10 @@ class Game extends Component {
             maxLength="1"
             value={ eval(`a${i}l${j}`) }
             onChange={ this.handleChange }
-            disabled={ i !== 1 ? true : false }
+            onKeyDown={ ({ key }) => (key === 'Enter' && j === 5 ? this.handleEnterKey() : null) }
+            disabled={ i !== currentAttempt ? true : false }
             autoComplete="off"
+            readOnly={ mobile }
           />
         );
       }
@@ -167,10 +189,6 @@ class Game extends Component {
   }
 
   render() {
-    const { keyTyped } = this.state;
-    
-    if (keyTyped === 'ENTER') this.handleEnterKey();
-
     return (
       <main>
         { this.renderForm() }
@@ -185,7 +203,7 @@ const mapStateToProps = ({ keyDown }) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   setKey: (key) => dispatch(sendKeyDown(key)),
-  enableEnter: () => dispatch(enableEnter()),
+  enableEnter: (payload) => dispatch(enableEnter(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);
