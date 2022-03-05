@@ -137,6 +137,23 @@ footer {
   border: solid #312a2c 3px;
 }
 
+/* SCORE */
+
+#score {
+  width: 50vw;
+  height: 70vh;
+  top: 15vh;
+  left: 25vw;
+  background-color: #312B2D;
+  color: #FAFAFF;
+  position: absolute;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 /* NON WIDESCREEN DISPLAY */
 
 @media only screen and (max-width: 1280px) {

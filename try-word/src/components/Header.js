@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { renderStats } from '../store/actions';
 import { help, stats, config } from '../services/icons';
 
 class Header extends Component {
   handleClick = ({ currentTarget: { id } }) => {
-    console.log(id);
+    const { renderStats } = this.props;
+
+    if (id === 'stats') return renderStats(true);
   }
 
   render() {
@@ -18,4 +22,8 @@ class Header extends Component {
   }
 }
 
-export default Header;
+const mapDispatchToProps = (dispatch) => ({
+  renderStats: (payload) => dispatch(renderStats(payload)),
+});
+
+export default connect(null, mapDispatchToProps)(Header);

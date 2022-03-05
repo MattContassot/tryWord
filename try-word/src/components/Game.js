@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { sendKeyDown, enableEnter } from '../store/actions';
+import { sendKeyDown, enableEnter, renderStats } from '../store/actions';
 import { ATTEMPTS } from '../services/constants';
 import { correctWord, selectWord, validateWord, focusNextLetter } from '../services/functions';
 
@@ -113,6 +113,8 @@ class Game extends Component {
   }
 
   handleEnterKey = () => {
+    const { renderStats } = this.props;
+    
     if (document.querySelector('.letterOnFocus').value) {
       const attemptId = `attempt${document.querySelector('.letterOnFocus').id.substring(1, 2)}`;
       const { words: { [attemptId]: attempt }, word } = this.state;
@@ -122,7 +124,7 @@ class Game extends Component {
  
       
       if (correctWord(word, [...wordTried], lastAttempt)) {
-        return alert('O jogo acabou');
+        return renderStats(true);
       }
 
       validateWord(word, [...wordTried], attemptId);
@@ -208,6 +210,7 @@ const mapStateToProps = ({ keyDown }) => ({
 const mapDispatchToProps = (dispatch) => ({
   setKey: (key) => dispatch(sendKeyDown(key)),
   enableEnter: (payload) => dispatch(enableEnter(payload)),
+  renderStats: (payload) => dispatch(renderStats(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);
