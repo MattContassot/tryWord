@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { renderStats } from '../store/actions';
+import { renderStats, renderHelp } from '../store/actions';
 import { help, stats, config } from '../services/icons';
 
 class Header extends Component {
   handleClick = ({ currentTarget: { id } }) => {
-    const { renderStats } = this.props;
+    const { renderStats, renderHelp } = this.props;
     const payload = { stats: true };
 
+    if (id === 'help') return renderHelp(true);
     if (id === 'stats') return renderStats(payload);
   }
 
@@ -24,6 +25,7 @@ class Header extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
+  renderHelp: (payload) => dispatch(renderHelp(payload)),
   renderStats: (payload) => dispatch(renderStats(payload)),
 });
 

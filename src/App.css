@@ -137,13 +137,69 @@ footer {
   border: solid #3aa394 3px;
 }
 
+/* HELP */
+
+#helpMenu {
+  display: flex;
+  flex-direction: column;
+}
+
+#helpMenu > p {
+  margin: 7px;
+}
+
+.tip {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
+.helpWordBox {
+  border: solid #4C4347 2px;
+  border-radius: 5px;
+  height: 40px;
+  width: 40px;
+  margin: 5px;
+  font-size: 25px;
+  font-weight: bold;
+  color: #FAFAFF;
+  background-color: #312B2D;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.helpInLine {
+  height: 20px;
+  width: 20px;
+  font-size: 18px;
+}
+
+.helpCorrect {
+  background-color: #3aa394;
+  border: solid #3aa394 2px;
+}
+
+.helpIncludes {
+  background-color: #d3ad69;
+  border: solid #d3ad69 2px;
+}
+
+.helpWrong {
+  color: #504a4b;
+  background-color: #191516;
+  border: solid #191516 2px;
+}
+
 /* SCORE */
 
-#score {
-  width: 50vw;
+.menu {
+  width: 70vw;
   height: 70vh;
   top: 15vh;
-  left: 25vw;
+  left: 15vw;
   background-color: #312B2D;
   color: #FAFAFF;
   position: absolute;
@@ -152,6 +208,20 @@ footer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 20px;
+  text-align: left;
+}
+
+/* NOTEBOOKS */
+
+@media only screen and (max-device-width: 1599px) and (min-width: 1281px) {
+  main {
+    margin-top: 10px;
+  }
+
+  footer {
+    margin-top: 10px;
+  }
 }
 
 /* NON WIDESCREEN DISPLAY */
@@ -168,21 +238,9 @@ footer {
   }
 }
 
-/* NOTEBOOKS */
-
-@media only screen and (max-width: 1500px) and (min-width: 1281px) {
-  main {
-    margin-top: 10px;
-  }
-
-  footer {
-    margin-top: 10px;
-  }
-}
-
 /* SMALL MOBILE */
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-device-width: 600px) {
   /* HEADER */
 
   header {
@@ -279,9 +337,43 @@ footer {
     background-color: #3aa394;
     border: solid #3aa394 3px;
   }
+
+  /* HELP */
+
+  .menu {
+    top: 7vh;
+    left: 10vw;
+  }
+
+  #helpMenu > p {
+    margin: 4px;
+    font-size: 12px;
+  }
+
+  span {
+    font-size: 12px;
+  }
+
+  span > p {
+    margin: 0;
+  }
+
+  .helpWordBox {
+    border-radius: 5px;
+    height: 20px;
+    width: 20px;
+    margin: 5px;
+    font-size: 15px;
+  }
+
+  .helpInLine {
+    height: 15px;
+    width: 15px;
+    font-size: 10px;
+  }
 }
 
-@media only screen and (min-height: 650px) {
+@media only screen and (min-device-height: 650px) and (max-device-height: 750px) {
   main {
     margin-top: 100px;
   }
