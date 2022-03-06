@@ -121,9 +121,10 @@ footer {
   width: 182px;
 }
 
-.correctLetter {
-  background-color: #3aa394;
-  border: solid #3aa394 3px;
+.wrongLetter {
+  color: #504a4b;
+  background-color: #312a2c;
+  border: solid #312a2c 3px;
 }
 
 .letterIncluded {
@@ -131,10 +132,9 @@ footer {
   border: solid #d3ad69 3px;
 }
 
-.wrongLetter {
-  color: #504a4b;
-  background-color: #312a2c;
-  border: solid #312a2c 3px;
+.correctLetter {
+  background-color: #3aa394;
+  border: solid #3aa394 3px;
 }
 
 /* SCORE */
@@ -252,19 +252,19 @@ footer {
     width: 81px;
   }
 
-  .correctLetter {
-    background-color: #3aa394;
-    border: solid #3aa394 3px;
+  .wrongLetter {
+    color: #504a4b;
+    background-color: #312a2c;
+    border: solid #312a2c 3px;
   }
   
   .letterIncluded {
     background-color: #d3ad69;
     border: solid #d3ad69 3px;
   }
-  
-  .wrongLetter {
-    color: #504a4b;
-    background-color: #312a2c;
-    border: solid #312a2c 3px;
+
+  .correctLetter {
+    background-color: #3aa394;
+    border: solid #3aa394 3px;
   }
 }

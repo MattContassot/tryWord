@@ -14,7 +14,7 @@ export function selectWord() {
 export function validateWord(word, wordTried, attempt) {
   const wordArray = Array.from(word);
   const attemptId = attempt.substring(7, 8);
-  let wordIncluded = wordArray;
+  let wordIncluded = [...wordArray];
 
   for (let i = 0; i < WORD_LENGTH; i += 1) {
     let currentLetter = '';
@@ -23,23 +23,32 @@ export function validateWord(word, wordTried, attempt) {
     currentLetter = document.querySelector(`#a${attemptId}-l${i + 1}`);
     letterOnKeyboard = document.querySelector(`#${currentLetter.value}`);
 
-    if (!wordArray.includes(wordTried[i])) {
-      currentLetter.classList.add('wrongLetter');
-      letterOnKeyboard.classList.add('wrongLetter');
-      letterOnKeyboard.disabled = true;      
+    if (wordArray[i] === wordTried[i]) {
+      currentLetter.classList.add('correctLetter');
+      letterOnKeyboard.classList.add('correctLetter');
+      wordIncluded.splice(i, 1, '*');
     }
 
-    else if (wordArray[i] === wordTried[i]) {
-      currentLetter.classList.add('correctLetter');
-      wordArray.splice(i, 1, '*');
+    else if (wordIncluded.includes(wordTried[i])) {
+      currentLetter.classList.add('letterIncluded');
+      letterOnKeyboard.classList.add('letterIncluded');
+      wordIncluded.splice(wordIncluded.indexOf(wordTried[i]), 1, '*');
     }
 
     else {
-      if (wordIncluded.includes(wordTried[i])) {
-        currentLetter.classList.add('letterIncluded');
-        letterOnKeyboard.classList.add('letterIncluded');
-        wordIncluded.splice(wordIncluded.indexOf(wordTried[i]), 1, '*');
-      }
+      const word = document.querySelectorAll(`[class*="correctLetter"]`);
+      word.forEach((letter) => {
+        if (letter.classList.contains('letterIncluded')) letter.classList.remove('letterIncluded');
+      });
+
+      if (!wordIncluded.includes(wordTried[i])) {
+        currentLetter.classList.add('wrongLetter');
+        
+        if (!wordArray.includes(wordTried[i])) {
+          letterOnKeyboard.classList.add('wrongLetter');
+          letterOnKeyboard.disabled = true;
+        }
+      }      
     }
   }
 }
