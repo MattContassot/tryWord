@@ -12,7 +12,7 @@ const menus = (state = INITIAL_STATE, actions) => {
 
   switch (type) {
   case RENDER_HELP:
-    return ({
+    return ({ 
       ...state,
       help: payload,
     });

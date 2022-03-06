@@ -77,8 +77,18 @@ class Game extends Component {
     if (prevProps.keyDown !== keyDown) {
       let key = keyDown;
       const id = document.querySelector('.letterOnFocus').id;
+      const attempt = `attempt${id.substring(1, 2)}`;
 
-      if (keyDown === 'delete') key = '';
+      if (keyDown === 'delete' || keyDown === 'deleteLast') key = '';
+
+      if (keyDown === 'deleteLast') return this.setState((prevState) => ({
+        ...prevState,
+        words: {
+          ...prevState.words,
+          [attempt]: {
+            ...prevState.words[attempt],
+            letter5: key,
+      }}}))
 
       const keyPressed = {
         nativeEvent: { data: key },

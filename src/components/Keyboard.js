@@ -5,6 +5,14 @@ import { KEYS } from '../services/constants';
 import { backspace } from '../services/icons';
 
 class Keyboard extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      toggleLastLetter: true,
+    }
+  }
+
   handleClick = ({ target: { id } }) => {
     const { setKey } = this.props;
 
@@ -13,11 +21,19 @@ class Keyboard extends Component {
 
   handleDelete = () => {
     const { setKey } = this.props;
+    const { toggleLastLetter } = this.state;
     const currentLetter = document.querySelector('.letterOnFocus');
 
     if (currentLetter.id.substring(4, 5) !== '1') {
       const previousLetterId = `${currentLetter.id.substring(0, 4)}${Number(currentLetter.id.substring(4, 5)) - 1}`
       const previousLetter = document.querySelector(`#${previousLetterId}`);
+
+      if (currentLetter.id.substring(4, 5) === '5' && toggleLastLetter && currentLetter.value !== '') {
+        this.setState({ toggleLastLetter: false });
+        return setKey('deleteLast', true);
+      }
+
+      this.setState({ toggleLastLetter: true });
 
       currentLetter.classList.remove('letterOnFocus');
       previousLetter.classList.add('letterOnFocus');

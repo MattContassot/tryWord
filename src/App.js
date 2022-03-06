@@ -5,6 +5,7 @@ import Game from './components/Game';
 import Keyboard from './components/Keyboard';
 import './App.css';
 import Score from './components/Score';
+import Help from './components/Help';
 
 class App extends Component {
   render() {
@@ -16,6 +17,7 @@ class App extends Component {
         <Game />
         <Keyboard />
         { stats && <Score />}
+        { help && <Help />}
       </div>
     );
   }

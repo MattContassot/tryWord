@@ -17,7 +17,7 @@ class Score extends Component {
     const { word } = this.props;
 
     return (
-      <section id="score">
+      <section className="menu">
         <button id="closeScore" onClick={ this.handleClick }>x</button>
         <p>Em breve haverá o placar neste menu</p>
         { word && <p>{word}</p>}
