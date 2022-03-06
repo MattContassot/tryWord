@@ -168,6 +168,18 @@ footer {
   }
 }
 
+/* NOTEBOOKS */
+
+@media only screen and (max-width: 1500px) and (min-width: 1281px) {
+  main {
+    margin-top: 10px;
+  }
+
+  footer {
+    margin-top: 10px;
+  }
+}
+
 /* SMALL MOBILE */
 
 @media only screen and (max-width: 600px) {
@@ -221,7 +233,7 @@ footer {
   footer {
     width: 360px;
     margin-top: 20px;
-    margin-left: 0;
+    margin-left: calc((100vw - 360px) / 2);
   }
   
   .key {
@@ -266,5 +278,15 @@ footer {
   .correctLetter {
     background-color: #3aa394;
     border: solid #3aa394 3px;
+  }
+}
+
+@media only screen and (min-height: 650px) {
+  main {
+    margin-top: 100px;
+  }
+
+  footer {
+    margin-top: 150px;
   }
 }
