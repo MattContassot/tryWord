@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { sendKeyDown, enableEnter } from '../store/actions';
+import { sendKeyDown, enableEnter, renderStats } from '../store/actions';
 import { ATTEMPTS } from '../services/constants';
 import { correctWord, selectWord, validateWord, focusNextLetter } from '../services/functions';
 
@@ -72,20 +72,24 @@ class Game extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { keyDown } = this.props;
+    const { keyDown, virtualKeyboard } = this.props;
 
     if (prevProps.keyDown !== keyDown) {
-      if (keyDown === 'ENTER') this.handleEnterKey();
-      
-      const key = keyDown;
+      let key = keyDown;
       const id = document.querySelector('.letterOnFocus').id;
+
+      if (keyDown === 'delete') key = '';
+
       const keyPressed = {
         nativeEvent: { data: key },
         target: { id }
       };
 
-      // this.handleChange(keyPressed);
-      this.setState({ keyTyped: keyDown });
+      if (keyDown === 'ENTER') this.handleEnterKey();
+
+      if (virtualKeyboard && keyDown !== 'ENTER') this.handleChange(keyPressed);
+
+      this.setState({ keyTyped: key });
     }
   }
 
@@ -108,11 +112,13 @@ class Game extends Component {
 
     if (id.substring(4, 5) === '5') return enableEnter(false);
     else {
-      enableEnter(true) && focusNextLetter(id);
+      key === '' ? enableEnter(true) : enableEnter(true) && focusNextLetter(id);
     }
   }
 
   handleEnterKey = () => {
+    const { renderStats } = this.props;
+
     if (document.querySelector('.letterOnFocus').value) {
       const attemptId = `attempt${document.querySelector('.letterOnFocus').id.substring(1, 2)}`;
       const { words: { [attemptId]: attempt }, word } = this.state;
@@ -122,7 +128,12 @@ class Game extends Component {
  
       
       if (correctWord(word, [...wordTried], lastAttempt)) {
-        return alert('O jogo acabou');
+        const { word } = this.state;
+        const payload = {
+          stats: true,
+          word,
+        }
+        return renderStats(payload);
       }
 
       validateWord(word, [...wordTried], attemptId);
@@ -201,13 +212,15 @@ class Game extends Component {
   }
 }
 
-const mapStateToProps = ({ keyDown }) => ({
-  keyDown,
+const mapStateToProps = ({ keyDown: { key, virtualKeyboard } }) => ({
+  keyDown: key,
+  virtualKeyboard,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   setKey: (key) => dispatch(sendKeyDown(key)),
   enableEnter: (payload) => dispatch(enableEnter(payload)),
+  renderStats: (payload) => dispatch(renderStats(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

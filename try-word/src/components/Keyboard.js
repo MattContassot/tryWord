@@ -8,14 +8,24 @@ class Keyboard extends Component {
   handleClick = ({ target: { id } }) => {
     const { setKey } = this.props;
 
-    setKey(id);
+    setKey(id, true);
   }
 
   handleDelete = () => {
     const { setKey } = this.props;
     const currentLetter = document.querySelector('.letterOnFocus');
 
-    setKey('');
+    if (currentLetter.id.substring(4, 5) !== '1') {
+      const previousLetterId = `${currentLetter.id.substring(0, 4)}${Number(currentLetter.id.substring(4, 5)) - 1}`
+      const previousLetter = document.querySelector(`#${previousLetterId}`);
+
+      currentLetter.classList.remove('letterOnFocus');
+      previousLetter.classList.add('letterOnFocus');
+      previousLetter.focus();
+      return setKey('delete', true);
+    }
+
+    setKey('', true);
   }
 
   render() {
@@ -47,7 +57,7 @@ const mapStateToProps = ({ lastLetter }) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setKey: (key) => dispatch(sendKeyDown(key)),
+  setKey: (key, virtualKeyboard) => dispatch(sendKeyDown(key, virtualKeyboard)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Keyboard);
