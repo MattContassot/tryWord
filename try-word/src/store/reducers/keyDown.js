@@ -1,11 +1,20 @@
 import { KEY_DOWN } from '../actions';
 
-const INITIAL_STATE = '';
+const INITIAL_STATE = {
+  key: '',
+  virtualKeyboard: false,
+};
 
 const keyDown = (state = INITIAL_STATE, actions) => {
-  switch (actions.type) {
+  const { type, key, virtualKeyboard } = actions;
+  
+  switch (type) {
   case KEY_DOWN:
-    return (actions.key);
+    return ({
+      ...state,
+      key,
+      virtualKeyboard,
+    });
   default:
     return state;
   }

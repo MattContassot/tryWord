@@ -4,9 +4,10 @@ export const RENDER_HELP = 'RENDER_HELP';
 export const RENDER_STATS = 'RENDER_STATS';
 export const RENDER_SETTINGS = 'RENDER_SETTINGS';
 
-export const setKey = (key) => ({
+export const setKey = (key, virtualKeyboard) => ({
   type: KEY_DOWN,
   key,
+  virtualKeyboard,
 });
 
 export const lastLetter = (payload) => ({
@@ -29,7 +30,7 @@ export const renderingSettings = (payload) => ({
   payload,
 })
 
-export const sendKeyDown = (key) => setKey(key);
+export const sendKeyDown = (key, virtualKeyboard = false) => setKey(key, virtualKeyboard);
 
 export const enableEnter = (payload) => lastLetter(payload);
 

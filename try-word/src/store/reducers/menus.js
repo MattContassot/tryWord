@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   help: false,
   stats: false,
   settings: false,
+  word: 'a',
 };
 
 const menus = (state = INITIAL_STATE, actions) => {
@@ -16,9 +17,12 @@ const menus = (state = INITIAL_STATE, actions) => {
       help: payload,
     });
   case RENDER_STATS:
+    const { stats, word = '' } = payload
+    
     return ({
       ...state,
-      stats: payload,
+      stats,
+      word,
     });
   case RENDER_SETTINGS:
     return ({

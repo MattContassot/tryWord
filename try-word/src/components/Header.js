@@ -6,8 +6,9 @@ import { help, stats, config } from '../services/icons';
 class Header extends Component {
   handleClick = ({ currentTarget: { id } }) => {
     const { renderStats } = this.props;
+    const payload = { stats: true };
 
-    if (id === 'stats') return renderStats(true);
+    if (id === 'stats') return renderStats(payload);
   }
 
   render() {
