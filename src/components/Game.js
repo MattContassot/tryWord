@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { sendKeyDown, enableEnter, renderStats } from '../store/actions';
-import { ATTEMPTS } from '../services/constants';
-import { correctWord, selectWord, validateWord, focusNextLetter } from '../services/functions';
+import { sendKeyDown, enableEnter, renderStats, renderPopUp } from '../store/actions';
+import { ATTEMPTS, POP_UP_TIME } from '../services/constants';
+import { correctWord, selectWord, validateWord, focusNextLetter, isValidWord } from '../services/functions';
 
 class Game extends Component {
   constructor() {
@@ -127,7 +127,7 @@ class Game extends Component {
   }
 
   handleEnterKey = () => {
-    const { renderStats } = this.props;
+    const { renderStats, renderPopUp } = this.props;
 
     if (document.querySelector('.letterOnFocus').value) {
       const attemptId = `attempt${document.querySelector('.letterOnFocus').id.substring(1, 2)}`;
@@ -146,25 +146,32 @@ class Game extends Component {
         return renderStats(payload);
       }
 
-      validateWord(word, [...wordTried], attemptId);
-      
-      this.setState((prevAttempt) => ({
-        ...prevAttempt,
-        currentAttempt: prevAttempt.currentAttempt + 1,
-      }), () => {
-        const attempt = document.querySelectorAll(`[id*=${attemptNumber}]`);
-        
-        attempt.forEach((letter) => {
-          letter.classList.remove('notCurrentAttemp');
-          const currentFocus = document.querySelector(`#${lastAttempt}-l5`);
-          const nextFocus = document.querySelector(`#${attemptNumber}-l1`);
-          
-          currentFocus.classList.remove('letterOnFocus');
-          nextFocus.classList.add('letterOnFocus');
+      else if (isValidWord(wordTried.join(''))) {
+        validateWord(word, [...wordTried], attemptId);
 
-          return nextFocus.focus();
-        });
-      })
+        this.setState((prevAttempt) => ({
+          ...prevAttempt,
+          currentAttempt: prevAttempt.currentAttempt + 1,
+        }), () => {
+          const attempt = document.querySelectorAll(`[id*=${attemptNumber}]`);
+          
+          attempt.forEach((letter) => {
+            letter.classList.remove('notCurrentAttemp');
+            const currentFocus = document.querySelector(`#${lastAttempt}-l5`);
+            const nextFocus = document.querySelector(`#${attemptNumber}-l1`);
+            
+            currentFocus.classList.remove('letterOnFocus');
+            nextFocus.classList.add('letterOnFocus');
+
+            return nextFocus.focus();
+          });
+        })
+      }
+
+      else {
+        renderPopUp(true);
+        setInterval(() => renderPopUp(false), POP_UP_TIME);
+      }
     }
   }
 
@@ -231,6 +238,7 @@ const mapDispatchToProps = (dispatch) => ({
   setKey: (key) => dispatch(sendKeyDown(key)),
   enableEnter: (payload) => dispatch(enableEnter(payload)),
   renderStats: (payload) => dispatch(renderStats(payload)),
+  renderPopUp: (payload) => dispatch(renderPopUp(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

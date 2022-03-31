@@ -90,3 +90,5 @@ export function correctWord(word, wordTried, lastAttempt) {
   }
   return false;
 }
+
+export const isValidWord = (word) => WORDS.includes(word);

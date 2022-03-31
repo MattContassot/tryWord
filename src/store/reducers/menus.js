@@ -1,9 +1,10 @@
-import { RENDER_HELP, RENDER_STATS, RENDER_SETTINGS, } from '../actions';
+import { RENDER_HELP, RENDER_STATS, RENDER_SETTINGS, RENDER_POP_UP } from '../actions';
 
 const INITIAL_STATE = {
   help: false,
   stats: false,
   settings: false,
+  invalidWord: false,
   word: 'a',
 };
 
@@ -28,6 +29,11 @@ const menus = (state = INITIAL_STATE, actions) => {
     return ({
       ...state,
       settings: payload,
+    });
+  case RENDER_POP_UP:
+    return ({
+      ...state,
+      invalidWord: payload,
     });
   default:
     return state;
