@@ -3,24 +3,25 @@ import { connect } from 'react-redux';
 import Header from './components/Header';
 import Game from './components/Game';
 import Keyboard from './components/Keyboard';
-import './App.css';
 import Score from './components/Score';
 import Help from './components/Help';
 import PopUp from './components/PopUp';
+import './styles/Reset.css';
+import { Body } from './styles/GlobalStyle';
 
 class App extends Component {
   render() {
     const { help, stats, settings, invalidWord } = this.props;
 
     return (
-      <div>
+      <Body>
         <Header />
         <Game />
         { invalidWord && <PopUp />}
         <Keyboard />
         { stats && <Score />}
         { help && <Help />}
-      </div>
+      </Body>
     );
   }
 }
