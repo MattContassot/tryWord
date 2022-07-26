@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { renderStats, renderHelp } from '../store/actions';
-import { help, stats, config } from '../services/icons';
+import { help, stats, config } from '../helpers/icons';
+import { StyledHeader, H1, P } from '../styles/Header';
 
 class Header extends Component {
   handleClick = ({ currentTarget: { id } }) => {
@@ -14,12 +15,12 @@ class Header extends Component {
 
   render() {
     return (
-      <header>
-        <p id="help" onClick={ this.handleClick }>{help()}</p>
-        <h1>Try Word</h1>
-        <p id="stats" onClick={ this.handleClick }>{stats()}</p>
-        <p id="settings" onClick={ this.handleClick }>{config()}</p>
-      </header>
+      <StyledHeader>
+        <P id="help" onClick={ this.handleClick } help>{help()}</P>
+        <H1>Try Word</H1>
+        <P id="stats" onClick={ this.handleClick }>{stats()}</P>
+        <P id="settings" onClick={ this.handleClick }>{config()}</P>
+      </StyledHeader>
     );
   }
 }

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { sendKeyDown } from '../store/actions';
-import { KEYS } from '../services/constants';
-import { backspace } from '../services/icons';
+import { KEYS } from '../helpers/constants';
+import { backspace } from '../helpers/icons';
+import { Footer, Key } from '../styles/Keyboard'
 
 class Keyboard extends Component {
   constructor() {
@@ -48,22 +49,25 @@ class Keyboard extends Component {
     const { lastLetter } = this.props;
 
     return (
-      <footer>
+      <Footer>
         {
-          KEYS.map((key, index) => (
-            <button
+          KEYS.map((key, index) => {
+            return (
+            <Key
               id={ key }
               type="button"
               key={ index }
               onClick={ key === 'ç' ? this.handleDelete : this.handleClick }
               className="key"
               disabled={ key === 'ENTER' && lastLetter ? true : false }
+              enter={ key === 'ENTER' }
             >
               {key === 'ç' ? backspace() : key}
-            </button>
-          ))
+            </Key>
+            );
+          })
         }
-      </footer>
+      </Footer>
     );
   }
 }

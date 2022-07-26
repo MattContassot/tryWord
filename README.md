@@ -1,1 +1,1 @@
-Um jogo de adivinhar palavras inspirado no term.ooo
+Um jogo de adivinhar palavras inspirado no wordle

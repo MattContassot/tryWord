@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { sendKeyDown, enableEnter, renderStats, renderPopUp } from '../store/actions';
-import { ATTEMPTS, POP_UP_TIME } from '../services/constants';
-import { correctWord, selectWord, validateWord, focusNextLetter, isValidWord } from '../services/functions';
+import { ATTEMPTS, POP_UP_TIME } from '../helpers/constants';
+import { correctWord, selectWord, validateWord, focusNextLetter, isValidWord } from '../helpers/functions';
+import { Attempt, Main, WordBox } from '../styles/Game';
 
 class Game extends Component {
   constructor() {
@@ -194,7 +195,7 @@ class Game extends Component {
 
       for (let j = 1; j <= ATTEMPTS - 1; j += 1) {
         newAttempt.push(
-          <input
+          <WordBox
             key={ `a${i}-l${j}` }
             id={ `a${i}-l${j}` }
             type="text"
@@ -211,9 +212,9 @@ class Game extends Component {
       }
 
       formRendered.push(
-        <form id={ `attempt-${i}` } key={ i }>
+        <Attempt id={ `attempt-${i}` } key={ i }>
           {newAttempt}
-        </form>
+        </Attempt>
       );
     }
 
@@ -222,9 +223,9 @@ class Game extends Component {
 
   render() {
     return (
-      <main>
+      <Main>
         { this.renderForm() }
-      </main>
+      </Main>
     );
   }
 }

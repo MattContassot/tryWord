@@ -1,63 +1,16 @@
 * {
-  margin: 0;
   border: 0;
+  color: #FAFAFF;
+  font-family: Verdana , Tahoma , sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  background-color: #6e5c62;
+  background-color: #6E5C62;
 }
 
-/* HEADER */
-
-header {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-}
-
-header > p {
-  height: 25px;
-  width: 25px;
-  color: #B7AEB4;
-  background-color: #6e5c62;
-  border: solid #B7AEB4 2px;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-header > h1 {
-  text-align: center;
-  width: 300px;
-  margin: 0 150px;
-  color: #FAFAFF;
-}
-
-#help, #settings {
-  margin-left: 30px;
-}
-
-/* GAME */
-
-main {
-  margin-top: 100px;
-}
-
-.wordBox {
-  border: solid #4C4347 3px;
-  border-radius: 5px;
-  height: 48px;
-  width: 48px;
-  margin: 3px;
-  font-size: 50px;
-  font-weight: bold;
-  text-align: center;
-  color: #FAFAFF;
-  background-color: #6e5c62;
-  outline: none;
-}
+/* GAME
 
 #ç > svg {
   width: 30px;
@@ -81,7 +34,7 @@ form {
   border-bottom: solid #4C4347 8px;
 }
 
-/* KEYBOARD */
+/* KEYBOARD
 
 footer {
   width: 714px;
@@ -137,7 +90,7 @@ footer {
   border: solid #3aa394 3px;
 }
 
-/* HELP */
+HELP
 
 #helpMenu {
   display: flex;
@@ -193,7 +146,7 @@ footer {
   border: solid #191516 2px;
 }
 
-/* SCORE */
+/* SCORE
 
 .menu {
   width: 70vw;
@@ -212,7 +165,7 @@ footer {
   text-align: left;
 }
 
-/* NOTEBOOKS */
+/* NOTEBOOKS
 
 @media only screen and (max-device-width: 1599px) and (min-width: 1281px) {
   main {
@@ -224,7 +177,7 @@ footer {
   }
 }
 
-/* NON WIDESCREEN DISPLAY */
+/* NON WIDESCREEN DISPLAY
 
 @media only screen and (max-width: 1280px) {
   .wordBox {
@@ -238,10 +191,10 @@ footer {
   }
 }
 
-/* SMALL MOBILE */
+/* SMALL MOBILE
 
 @media only screen and (max-device-width: 600px) {
-  /* HEADER */
+  /* HEADER
 
   header {
     width: 100%;
@@ -338,7 +291,7 @@ footer {
     border: solid #3aa394 3px;
   }
 
-  /* HELP */
+  /* HELP
 
   .menu {
     top: 7vh;
@@ -381,4 +334,4 @@ footer {
   footer {
     margin-top: 150px;
   }
-}
+} */
